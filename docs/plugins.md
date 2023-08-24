@@ -42,6 +42,6 @@ This is then accessible in your plugin's commands as `toolbox.bar`.
 
 # Loading a plugin
 
-To load a particular plugin (which has to start with `tmv-*`),
-install it to your project using `npm install --save-dev tmv-PLUGINNAME`,
+To load a particular plugin (which has to start with `vtm-*`),
+install it to your project using `npm install --save-dev vtm-PLUGINNAME`,
 and tmv will pick it up automatically.

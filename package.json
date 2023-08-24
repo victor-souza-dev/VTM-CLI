@@ -1,11 +1,11 @@
 {
-  "name": "tmv",
-  "version": "0.0.1",
-  "description": "tmv CLI",
+  "name": "vtm",
+  "version": "1.0.0",
+  "description": "vtm CLI",
   "private": true,
   "types": "build/types/types.d.ts",
   "bin": {
-    "tmv": "bin/tmv"
+    "vtm": "bin/vtm"
   },
   "scripts": {
     "clean-build": "rm -rf ./build",

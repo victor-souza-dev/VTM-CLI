@@ -1,7 +1,7 @@
 import { GluegunCommand } from 'gluegun'
 
 const command: GluegunCommand = {
-  name: 'tmv',
+  name: 'vtm',
   run: async (toolbox) => {
     const { print } = toolbox
 
