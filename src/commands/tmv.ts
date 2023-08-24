@@ -7,6 +7,7 @@ const command: GluegunCommand = {
 
     print.info('Welcome to your CLI')
   },
+  description: 'Welcome to system message',
 }
 
 module.exports = command

@@ -1,10 +1,17 @@
 import { GluegunCommand } from 'gluegun'
-import renamePackageName from '../utils/renamePackageName'
 
 const command: GluegunCommand = {
   name: 'create',
+  description: 'Create a new Vite project boilerplate',
   run: async (toolbox) => {
-    const { print, parameters, system, filesystem } = toolbox
+    const {
+      print,
+      parameters,
+      createBasicProject,
+      installDependencies,
+      typeProject,
+      openVsCode,
+    } = toolbox
 
     const projectName = parameters.first
 
@@ -15,21 +22,28 @@ const command: GluegunCommand = {
 
     print.info(`Creating a new Vite project with name: ${projectName}`)
 
-    // Clone the repository
-    system.exec(
-      `git clone -b basic https://github.com/TechMinds-Group/TechMinds-NodeCli.git ${projectName}`
-    )
+    try {
+      const projectTypeString = await typeProject()
 
-    // Navigate to the project directory
-    system.exec(`cd ${projectName}`)
+      switch (projectTypeString) {
+        case 'Basic':
+          await createBasicProject({ projectName })
+          break
+        case 'Custom':
+          print.error('Not implemented yet.')
+          return
+        default:
+          await createBasicProject({ projectName })
+          break
+      }
 
-    // Rename package name
-    renamePackageName({ filesystem, projectName })
-
-    // Run npm install
-    system.exec('npm install')
-
-    print.success('Project created successfully!')
+      await installDependencies({ projectName })
+      await openVsCode()
+      print.success('Project created successfully!')
+    } catch (err) {
+      print.error(err)
+      process.exit(1)
+    }
   },
 }
 
