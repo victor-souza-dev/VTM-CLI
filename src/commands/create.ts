@@ -8,7 +8,7 @@ const command: GluegunCommand = {
   run: async (toolbox) => {
     const {
       print,
-      parameters,
+      parameters: { first },
       createProject,
       installDependencies,
       typeProject,
@@ -16,14 +16,14 @@ const command: GluegunCommand = {
       selectOption,
     } = toolbox
 
-    const projectName = parameters.first
+    const projectName = first
 
     if (!projectName) {
       print.error('Please provide a project name.')
       return
     }
 
-    let config: IConfigProject = { name: projectName, ...defaultConfig }
+    let config: IConfigProject = { ...defaultConfig, name: projectName }
 
     print.info(`Creating a new Vite project with name: ${projectName}`)
 

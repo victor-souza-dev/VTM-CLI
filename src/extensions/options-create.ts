@@ -2,7 +2,7 @@ import { Toolbox } from 'gluegun/build/types/domain/toolbox'
 import { ISelectOption } from '../control-objects/customOptions'
 
 module.exports = (toolbox: Toolbox) => {
-  const { prompt, print, system } = toolbox
+  const { prompt, system } = toolbox
 
   async function typeProject(): Promise<string> {
     const projectType = await prompt.ask({
@@ -16,8 +16,7 @@ module.exports = (toolbox: Toolbox) => {
       !projectType ||
       !['Basic', 'Custom'].includes(projectType.projectType)
     ) {
-      print.error('Invalid project type selected.')
-      return
+      throw new Error('Invalid project type selected')
     }
 
     return await projectType.projectType
@@ -50,8 +49,7 @@ module.exports = (toolbox: Toolbox) => {
     })
 
     if (!select || !choices.includes(select[name])) {
-      print.error(errorMessage)
-      return
+      throw new Error(errorMessage)
     }
 
     return select[name]
