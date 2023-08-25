@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "vtm CLI",
   "private": true,
+  "author": "klowdyacrux",
   "types": "build/types/types.d.ts",
   "bin": {
     "vtm": "bin/vtm"
