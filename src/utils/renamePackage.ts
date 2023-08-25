@@ -1,12 +1,8 @@
 import * as fs from 'fs'
 
-interface IArgs {
+export default async function renamePackage(
   projectName: string
-}
-
-export default async function renamePackage({
-  projectName,
-}: IArgs): Promise<void> {
+): Promise<void> {
   const projectPath = process.cwd()
   const packageJsonPath = `${projectPath}\\${projectName}\\package.json`
   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))

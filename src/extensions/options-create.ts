@@ -1,4 +1,5 @@
 import { Toolbox } from 'gluegun/build/types/domain/toolbox'
+import { ISelectOption } from '../control-objects/customOptions'
 
 module.exports = (toolbox: Toolbox) => {
   const { prompt, print, system } = toolbox
@@ -35,6 +36,28 @@ module.exports = (toolbox: Toolbox) => {
     await system.exec('code .')
   }
 
+  async function selectOption({
+    name,
+    choices,
+    message,
+    errorMessage,
+  }: ISelectOption): Promise<string> {
+    const select = await prompt.ask({
+      type: 'select',
+      choices: [...choices],
+      name,
+      message,
+    })
+
+    if (!select || !choices.includes(select[name])) {
+      print.error(errorMessage)
+      return
+    }
+
+    return select[name]
+  }
+
+  toolbox.selectOption = selectOption
   toolbox.typeProject = typeProject
   toolbox.openVsCode = openVsCode
 }

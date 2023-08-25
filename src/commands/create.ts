@@ -1,4 +1,6 @@
 import { GluegunCommand } from 'gluegun'
+import { configCustom } from '../utils/configCustom'
+import { IConfigProject, defaultConfig } from '../control-objects/defaultConfig'
 
 const command: GluegunCommand = {
   name: 'create',
@@ -7,10 +9,11 @@ const command: GluegunCommand = {
     const {
       print,
       parameters,
-      createBasicProject,
+      createProject,
       installDependencies,
       typeProject,
       openVsCode,
+      selectOption,
     } = toolbox
 
     const projectName = parameters.first
@@ -20,25 +23,21 @@ const command: GluegunCommand = {
       return
     }
 
+    let config: IConfigProject = { name: projectName, ...defaultConfig }
+
     print.info(`Creating a new Vite project with name: ${projectName}`)
 
     try {
       const projectTypeString = await typeProject()
 
-      switch (projectTypeString) {
-        case 'Basic':
-          await createBasicProject({ projectName })
-          break
-        case 'Custom':
-          print.error('Not implemented yet.')
-          return
-        default:
-          await createBasicProject({ projectName })
-          break
+      if (projectTypeString === 'Custom') {
+        config = await configCustom({ projectName, selectOption })
       }
 
+      await createProject(config)
       await installDependencies({ projectName })
       await openVsCode()
+
       print.success('Project created successfully!')
     } catch (err) {
       print.error(err)
