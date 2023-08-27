@@ -1,5 +1,5 @@
-import { ISelectOption, customOptions } from '../control-objects/customOptions'
-import { IConfigProject, defaultConfig } from '../control-objects/defaultConfig'
+import { ISelectOption, customOptions } from '../controls/customOptions'
+import { IConfigProject, defaultConfig } from '../controls/defaultConfig'
 
 interface ICreate {
   projectName: string

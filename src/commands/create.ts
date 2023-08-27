@@ -1,6 +1,6 @@
 import { GluegunCommand } from 'gluegun'
 import { configCustom } from '../utils/configCustom'
-import { IConfigProject, defaultConfig } from '../control-objects/defaultConfig'
+import { IConfigProject, defaultConfig } from '../controls/defaultConfig'
 
 const command: GluegunCommand = {
   name: 'create',
@@ -10,9 +10,9 @@ const command: GluegunCommand = {
       print,
       parameters: { first },
       createProject,
-      installDependencies,
+      // installDependencies,
       typeProject,
-      openVsCode,
+      // openVsCode,
       selectOption,
     } = toolbox
 
@@ -35,8 +35,8 @@ const command: GluegunCommand = {
       }
 
       await createProject(config)
-      await installDependencies({ projectName })
-      await openVsCode()
+      // await installDependencies({ projectName })
+      // await openVsCode()
 
       print.success('Project created successfully!')
     } catch (err) {

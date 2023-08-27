@@ -1,5 +1,5 @@
 {
-  "name": "vtm",
+  "name": "vtm-cli",
   "version": "1.0.0",
   "description": "vtm CLI",
   "author": "klowdyacrux",
@@ -28,7 +28,9 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "adm-zip": "^0.5.10",
     "gluegun": "latest",
+    "js-yaml": "^4.1.0",
     "shelljs": "^0.8.5"
   },
   "devDependencies": {

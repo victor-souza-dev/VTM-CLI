@@ -1,5 +1,5 @@
 import { Toolbox } from 'gluegun/build/types/domain/toolbox'
-import { ISelectOption } from '../control-objects/customOptions'
+import { ISelectOption } from '../controls/customOptions'
 
 module.exports = (toolbox: Toolbox) => {
   const { prompt, system } = toolbox
