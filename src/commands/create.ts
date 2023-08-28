@@ -10,9 +10,10 @@ const command: GluegunCommand = {
       print,
       parameters: { first },
       createProject,
-      // installDependencies,
+      configureProject,
+      installDependencies,
       typeProject,
-      // openVsCode,
+      openVsCode,
       selectOption,
     } = toolbox
 
@@ -35,8 +36,9 @@ const command: GluegunCommand = {
       }
 
       await createProject(config)
-      // await installDependencies({ projectName })
-      // await openVsCode()
+      await configureProject(`./${config.name}/`)
+      await installDependencies({ projectName })
+      await openVsCode()
 
       print.success('Project created successfully!')
     } catch (err) {
