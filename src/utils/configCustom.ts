@@ -1,5 +1,6 @@
-import { ISelectOption, customOptions } from '../controls/customOptions'
-import { IConfigProject, defaultConfig } from '../controls/defaultConfig'
+import { ISelectOption } from '../controls/customOptions'
+import { IConfigProject } from '../controls/defaultConfig'
+import { processStep } from './stepManager'
 
 interface ICreate {
   projectName: string
@@ -14,17 +15,7 @@ export async function configCustom({
     name: projectName,
   }
 
-  const keys = Object.keys(defaultConfig) as Array<keyof IConfigProject>
+  const initialStep = 'cssFramework'
 
-  for (const key of keys) {
-    if (customOptions[key]) {
-      const option = await selectOption(customOptions[key])
-      customConfig = {
-        ...customConfig,
-        [key]: option,
-      }
-    }
-  }
-
-  return customConfig as IConfigProject
+  return processStep(initialStep, customConfig, selectOption)
 }

@@ -3,7 +3,7 @@
  */
 module.exports = {
   parser: '@typescript-eslint/parser',
-  trailingComma: 'es6',
+  trailingComma: 'es5',
   tabWidth: 2,
   semi: true,
   singleQuote: true,

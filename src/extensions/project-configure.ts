@@ -8,7 +8,7 @@ module.exports = (toolbox: Toolbox) => {
       const configContents = fs.readFileSync(`${path}config.yml`, 'utf-8')
       const config = yaml.load(configContents)
       console.log('Configurações lidas:', config)
-    } catch (error) {
+    } catch (err) {
       throw new Error('Erro ao ler o arquivo de configuração')
     }
   }
