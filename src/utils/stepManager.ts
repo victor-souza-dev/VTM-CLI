@@ -5,6 +5,7 @@ function getNewStep(step: string): string | undefined {
   const currentPosition = Object.keys(customOptions)
   return currentPosition[currentPosition.indexOf(step) + 1]
 }
+
 async function getNextOptions(
   previousOptions: Partial<IConfigProject>,
   step: string
@@ -19,16 +20,15 @@ async function getNextOptions(
         ...customOptions[step],
         choices: filteredChoices,
       }
-    } else if (previousOptions.cssFramework === 'Chakra-UI') {
-      return undefined
-    }
+    } else if (previousOptions.cssFramework === 'Chakra-UI') undefined
   }
 
+  // @ts-ignore
   return customOptions[step]
 }
 
 export async function processStep(
-  currentStep: string,
+  currentStep: string | undefined,
   customConfig: Partial<IConfigProject>,
   selectOption: (object: ISelectOption) => Promise<string>
 ): Promise<IConfigProject> {

@@ -1,6 +1,6 @@
 import { build } from 'gluegun'
 
-async function run(argv) {
+async function run(argv: any) {
   const cli = build()
     .brand('vtm')
     .src(__dirname)

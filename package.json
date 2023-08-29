@@ -28,6 +28,9 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@types/adm-zip": "^0.5.0",
+    "@types/js-yaml": "^4.0.5",
+    "@types/shelljs": "^0.8.12",
     "adm-zip": "^0.5.10",
     "gluegun": "latest",
     "js-yaml": "^4.1.0",

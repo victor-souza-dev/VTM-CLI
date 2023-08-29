@@ -1,8 +1,12 @@
-export const dependencyInstall = {
+interface IDependencyInstall {
+  [key: string]: string | { [key: string]: string }
+}
+
+export const dependencyInstall: IDependencyInstall = {
   sass: '-D sass @types/sass',
   styledcomponents:
     'styled-components@^6.0.0-rc.6 @types/styled-components@^5.1.26',
-  mui5: {
+  materialui: {
     emotion: '@mui/material @emotion/react @emotion/styled @mui/icons-material',
     styledcomponents:
       'styled-components@^6.0.0-rc.6 @types/styled-components@^5.1.26 @mui/material @mui/styled-engine-sc @mui/icons-material',

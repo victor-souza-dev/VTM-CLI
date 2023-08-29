@@ -7,7 +7,7 @@ const command: GluegunCommand = {
   description: 'Create a new Vite project boilerplate',
   run: async (toolbox) => {
     const {
-      print,
+      print: { info, success, error },
       parameters: { first },
       createProject,
       configureProject,
@@ -20,13 +20,13 @@ const command: GluegunCommand = {
     const projectName = first
 
     if (!projectName) {
-      print.error('Please provide a project name.')
+      error('Please provide a project name.')
       return
     }
 
     let config: IConfigProject = { ...defaultConfig, name: projectName }
 
-    print.info(`Creating a new Vite project with name: ${projectName}`)
+    info(`Creating a new Vite project with name: ${projectName}`)
 
     try {
       const projectTypeString = await typeProject()
@@ -40,9 +40,9 @@ const command: GluegunCommand = {
       await installDependencies({ projectName })
       await openVsCode()
 
-      print.success('Project created successfully!')
+      success('Project created successfully!')
     } catch (err) {
-      print.error(err)
+      error(err)
       process.exit(1)
     }
   },

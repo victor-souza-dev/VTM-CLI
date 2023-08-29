@@ -1,5 +1,5 @@
 export interface IConfigProject {
-  name: string
+  name?: string
   cssFramework: string
   cssStyled: string
 }

@@ -16,7 +16,7 @@ module.exports = (toolbox: Toolbox) => {
 
     filesystem.write(`./${name}/config.yml`, yaml.dump(rest))
 
-    await renamePackage(name)
+    await renamePackage(name as string)
   }
 
   toolbox.createProject = create
