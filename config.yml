@@ -1,2 +1,3 @@
-cssFramework: 'Material UI'
-cssStyled: 'Styled Components'
+styled:
+    cssFramework: 'Chakra UI'
+    cssStyled: 'Sass'

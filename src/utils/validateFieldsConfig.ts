@@ -1,6 +1,6 @@
 import { IConfigProject, defaultConfig } from '../controls/defaultConfig'
 
-export function validateFieldsConfig(config: IConfigProject): void {
+export function validateFieldsConfig(config: Partial<IConfigProject>): void {
   const fields: string[] = Object.keys(config)
   const fieldsRequired: string[] = Object.keys(defaultConfig)
 

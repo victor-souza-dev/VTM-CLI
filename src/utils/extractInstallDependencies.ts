@@ -1,27 +1,29 @@
-import { IConfigProject } from '../controls/defaultConfig'
+import { IConfigAdapter } from '../adapters/configAdapter'
 import { dependencyInstall } from '../controls/dependencyInstall'
 
 function tratamentValues(value: string): string {
   return value.toLowerCase().replace(/\s/g, '')
 }
 
-export function extractInstallDependencies(config: IConfigProject) {
+export function extractInstallDependencies(config: IConfigAdapter) {
   let dependencies: string = 'npm i '
-  let valuesConfig: string[] = Object.values(config)
 
-  valuesConfig.forEach((value: string) => {
-    if (
-      tratamentValues(config.cssFramework) === 'materialui' &&
-      tratamentValues(value) === 'materialui'
-    ) {
-      console.log(tratamentValues(value))
+  switch (tratamentValues(config.styled.cssFramework)) {
+    case `materialui`:
       dependencies +=
         // @ts-ignore
-        dependencyInstall.materialui[tratamentValues(config.cssStyled)] + ' '
-    } else {
-      dependencies += dependencyInstall[tratamentValues(value)] + ' '
-    }
-  })
+        dependencyInstall.materialui[tratamentValues(config.styled.cssStyled)] +
+        ``
+      break
+
+    default:
+      Object.keys(config.styled).forEach((value) => {
+        dependencies +=
+          // @ts-ignore
+          dependencyInstall[tratamentValues(config.styled[value])] + ' '
+      })
+      break
+  }
 
   return dependencies.trim()
 }

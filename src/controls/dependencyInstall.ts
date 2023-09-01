@@ -1,5 +1,16 @@
 interface IDependencyInstall {
-  [key: string]: string | { [key: string]: string }
+  sass: string
+  styledcomponents: string
+  materialui: {
+    emotion: string
+    styledcomponents: string
+  }
+  chakraui: string
+  zustand: string
+  redux: string
+  reactquery: string
+  axios: string
+  storybook: string
 }
 
 export const dependencyInstall: IDependencyInstall = {

@@ -20,7 +20,7 @@ async function getNextOptions(
         ...customOptions[step],
         choices: filteredChoices,
       }
-    } else if (previousOptions.cssFramework === 'Chakra-UI') undefined
+    } else if (previousOptions.cssFramework === 'Chakra UI') undefined
   }
 
   // @ts-ignore
