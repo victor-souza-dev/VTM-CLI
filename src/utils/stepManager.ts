@@ -1,6 +1,16 @@
 import { ISelectOption, customOptions } from '../controls/customOptions'
 import { IConfigProject } from '../controls/defaultConfig'
 
+function filterOptions(step: string, removeOptions: string[]) {
+  // @ts-ignore
+  if (!customOptions[step]) throw new Error('invalid Step')
+
+  // @ts-ignore
+  return customOptions[step].choices.filter(
+    (choice: string) => !removeOptions.includes(choice)
+  )
+}
+
 function getNewStep(step: string): string | undefined {
   const currentPosition = Object.keys(customOptions)
   return currentPosition[currentPosition.indexOf(step) + 1]
@@ -11,18 +21,24 @@ async function getNextOptions(
   step: string
 ): Promise<ISelectOption | undefined> {
   if (step === 'cssStyled') {
-    if (previousOptions.cssFramework === 'Material UI') {
-      const filteredChoices = customOptions[step].choices.filter(
-        (choice) => choice !== 'Sass' && choice !== 'None'
-      )
-
-      return {
-        ...customOptions[step],
-        choices: filteredChoices,
-      }
-    } else if (previousOptions.cssFramework === 'Chakra UI') undefined
+    switch (previousOptions.cssFramework?.toLowerCase()) {
+      case 'material ui':
+        return {
+          ...customOptions[step],
+          choices: filterOptions(step, ['Sass', 'None']),
+        }
+      case 'chakra ui':
+        return {
+          ...customOptions[step],
+          choices: filterOptions(step, ['Emotion']),
+        }
+      default:
+        return {
+          ...customOptions[step],
+          choices: filterOptions(step, []),
+        }
+    }
   }
-
   // @ts-ignore
   return customOptions[step]
 }

@@ -1,10 +1,10 @@
 import { Toolbox } from 'gluegun/build/types/domain/toolbox'
 import { IConfigProject } from '../controls/defaultConfig'
+import { configAdapter } from '../adapters/configAdapter'
 import renamePackage from '../utils/renamePackage'
 import * as yaml from 'js-yaml'
 import * as AdmZip from 'adm-zip'
 import * as path from 'path'
-import { configAdapter } from '../adapters/configAdapter'
 
 module.exports = (toolbox: Toolbox) => {
   const { filesystem } = toolbox

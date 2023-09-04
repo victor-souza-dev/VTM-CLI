@@ -13,6 +13,14 @@ export function extractInstallDependencies(config: IConfigAdapter) {
 
   switch (tratamentValues(config.styled.cssFramework)) {
     case `materialui`:
+      if (
+        // @ts-ignore
+        !dependencyInstall.materialui[tratamentValues(config.styled.cssStyled)]
+      ) {
+        throw new Error(
+          `To use Material Ui, you need to specify a valid cssStyled`
+        )
+      }
       dependencies += `${
         // @ts-ignore
         dependencyInstall.materialui[tratamentValues(config.styled.cssStyled)]
@@ -21,8 +29,11 @@ export function extractInstallDependencies(config: IConfigAdapter) {
 
     default:
       Object.keys(config.styled).forEach((value) => {
-        // @ts-ignore
-        if (!dependencyInstall[tratamentValues(config.styled[value])]) {
+        if (
+          // @ts-ignore
+          !dependencyInstall[tratamentValues(config.styled[value])] &&
+          tratamentValues(config.styled[value]) !== 'none'
+        ) {
           throw new Error(
             `The ${value} contains an invalid value, see valid options in the documentation: https://github.com/TechMinds-Group/VTM-CLI`
           )

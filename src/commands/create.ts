@@ -36,7 +36,8 @@ const command: GluegunCommand = {
       }
 
       await createProject(config)
-      await configureProject(`./${config.name}/`)
+      projectTypeString === 'Custom' &&
+        (await configureProject(`./${config.name}/`))
       await installDependencies({ projectName })
       await openVsCode()
 
