@@ -1,21 +1,14 @@
 import { IConfigAdapter } from '../adapters/configAdapter'
 import { dependencyInstall } from '../controls/dependencyInstall'
 
-function tratamentValues(value: string): string {
-  if (!value) {
-    return ''
-  }
-  return value.toLowerCase().replace(/\s/g, '')
-}
-
 export function extractInstallDependencies(config: IConfigAdapter) {
   let dependencies: string = 'npm i '
 
-  switch (tratamentValues(config.styled.cssFramework)) {
+  switch (config.styled.cssFramework) {
     case `materialui`:
       if (
         // @ts-ignore
-        !dependencyInstall.materialui[tratamentValues(config.styled.cssStyled)]
+        !dependencyInstall.materialui[config.styled.cssStyled]
       ) {
         throw new Error(
           `To use Material Ui, you need to specify a valid cssStyled`
@@ -23,7 +16,7 @@ export function extractInstallDependencies(config: IConfigAdapter) {
       }
       dependencies += `${
         // @ts-ignore
-        dependencyInstall.materialui[tratamentValues(config.styled.cssStyled)]
+        dependencyInstall.materialui[config.styled.cssStyled]
       } `
       break
 
@@ -31,18 +24,18 @@ export function extractInstallDependencies(config: IConfigAdapter) {
       Object.keys(config.styled).forEach((value) => {
         if (
           // @ts-ignore
-          !dependencyInstall[tratamentValues(config.styled[value])] &&
-          tratamentValues(config.styled[value]) !== 'none'
+          !dependencyInstall[config.styled[value]] &&
+          config.styled[value] !== 'none'
         ) {
           throw new Error(
             `The ${value} contains an invalid value, see valid options in the documentation: https://github.com/TechMinds-Group/VTM-CLI`
           )
         }
 
-        if (tratamentValues(config.styled[value]) !== 'none') {
+        if (config.styled[value] !== 'none') {
           dependencies +=
             // @ts-ignore
-            `${dependencyInstall[tratamentValues(config.styled[value])]} `
+            `${dependencyInstall[config.styled[value]]} `
         }
       })
       break

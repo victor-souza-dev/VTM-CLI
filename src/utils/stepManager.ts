@@ -35,7 +35,7 @@ async function getNextOptions(
       default:
         return {
           ...customOptions[step],
-          choices: filterOptions(step, []),
+          choices: filterOptions(step, ['Emotion']),
         }
     }
   }
