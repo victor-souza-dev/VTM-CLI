@@ -20,7 +20,9 @@ module.exports = (toolbox: Toolbox) => {
     config = tratamentConfigs(config)
 
     //const dependencies = extractInstallDependencies(config)
-    console.log(getTemplatePath(config.styled, 'home'))
+    console.log(
+      getTemplatePath(config.styled, 'home', `${path}src/pages/home/`)
+    )
 
     //await template.generate({
     //template: '',

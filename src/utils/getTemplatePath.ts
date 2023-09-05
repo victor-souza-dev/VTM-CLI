@@ -1,6 +1,7 @@
 export function getTemplatePath(
   config: Record<string, string>,
-  name: string = ''
+  name: string = '',
+  path: string
 ) {
   let templates: string = ''
 
@@ -12,5 +13,5 @@ export function getTemplatePath(
 
   const template = templates + 'ts.ejs'
 
-  return template
+  return { template, target: path }
 }
