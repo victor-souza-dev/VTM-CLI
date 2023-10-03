@@ -20,7 +20,7 @@ VTM is a CLI for generating boilerplates in React Vite projects, in order to fac
 
 ### How to use?
 
-To use the VTN is simple, just download the package globally with the command `npm install -g vtm`.
+To use the VTM is simple, just download the package globally with the command `npm install -g vtm`.
 After that, just open the terminal in any folder and use the cli with the `vtm` command.
 
 #### Commands
