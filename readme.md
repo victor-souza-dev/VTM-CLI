@@ -8,7 +8,7 @@ A CLI for React Vite Projects developed by the group TechMinds.
     <img width="180" src="https://vitejs.dev/logo.svg" alt="Vite logo">
   </a>
   <a>
-    <img width="180" src="https://raw.githubusercontent.com/TechMinds-Group/TechMinds-NodeCli/basic/public/assets/logo.png" alt="TechMinds logo" />
+    <img width="180" src="./assets/logo.png" alt="TechMinds logo" />
   </a>
   <a>
     <img width="180" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" alt="React logo" />
