@@ -1,9 +1,12 @@
 import * as fs from 'fs'
 import { Toolbox } from 'gluegun/build/types/domain/toolbox'
 import * as shell from 'shelljs'
+import { IConfigAdapter } from '../adapters/configAdapter'
+import { extractInstallDependencies } from '../utils/extractInstallDependencies'
 
 interface IInstallDependencies {
   projectName: string
+  config: IConfigAdapter
 }
 
 module.exports = (toolbox: Toolbox) => {
@@ -12,7 +15,10 @@ module.exports = (toolbox: Toolbox) => {
     print: { info },
   } = toolbox
 
-  async function installDependencies({ projectName }: IInstallDependencies) {
+  async function installDependencies({
+    projectName,
+    config,
+  }: IInstallDependencies) {
     const i = parameters.options.i || parameters.options.install
 
     if (!i) {
@@ -24,9 +30,12 @@ module.exports = (toolbox: Toolbox) => {
       throw new Error(`No package.json found in ${projectName}`)
     }
 
+    const extractDependencies = extractInstallDependencies(config)
+
     info('Installing dependencies...')
 
     await shell.cd(projectName).exec(`npm install`)
+    await shell.cd(projectName).exec(extractDependencies)
   }
 
   toolbox.installDependencies = installDependencies

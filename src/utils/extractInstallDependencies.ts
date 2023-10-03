@@ -1,14 +1,15 @@
 import { IConfigAdapter } from '../adapters/configAdapter'
 import { dependencyInstall } from '../controls/dependencyInstall'
+import { formatString } from './formatString'
 
 export function extractInstallDependencies(config: IConfigAdapter) {
   let dependencies: string = 'npm i '
 
-  switch (config.styled.cssFramework) {
+  switch (formatString(config.styled.cssFramework)) {
     case `materialui`:
       if (
         // @ts-ignore
-        !dependencyInstall.materialui[config.styled.cssStyled]
+        !dependencyInstall.materialui[formatString(config.styled.cssStyled)]
       ) {
         throw new Error(
           `To use Material Ui, you need to specify a valid cssStyled`
@@ -16,7 +17,7 @@ export function extractInstallDependencies(config: IConfigAdapter) {
       }
       dependencies += `${
         // @ts-ignore
-        dependencyInstall.materialui[config.styled.cssStyled]
+        dependencyInstall.materialui[formatString(config.styled.cssStyled)]
       } `
       break
 
@@ -24,18 +25,19 @@ export function extractInstallDependencies(config: IConfigAdapter) {
       Object.keys(config.styled).forEach((value) => {
         if (
           // @ts-ignore
-          !dependencyInstall[config.styled[value]] &&
-          config.styled[value] !== 'none'
+          !dependencyInstall[config.styled[formatString(value)]] &&
+          formatString(config.styled[formatString(value)]) !== 'none'
         ) {
           throw new Error(
             `The ${value} contains an invalid value, see valid options in the documentation: https://github.com/TechMinds-Group/VTM-CLI`
           )
         }
 
-        if (config.styled[value] !== 'none') {
-          dependencies +=
+        if (formatString(config.styled[formatString(value)]) !== 'none') {
+          dependencies += `${
             // @ts-ignore
-            `${dependencyInstall[config.styled[value]]} `
+            dependencyInstall[formatString(config.styled[formatString(value)])]
+          } `
         }
       })
       break

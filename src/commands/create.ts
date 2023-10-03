@@ -1,6 +1,7 @@
 import { GluegunCommand } from 'gluegun'
 import { configCustom } from '../utils/configCustom'
 import { IConfigProject, defaultConfig } from '../controls/defaultConfig'
+import { configAdapter } from '../adapters/configAdapter'
 
 const command: GluegunCommand = {
   name: 'create',
@@ -38,7 +39,7 @@ const command: GluegunCommand = {
       await createProject(config)
       projectTypeString === 'Custom' &&
         (await configureProject(`./${config.name}/`))
-      await installDependencies({ projectName })
+      await installDependencies({ projectName, config: configAdapter(config) })
       await openVsCode()
 
       success('Project created successfully!')
